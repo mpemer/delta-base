@@ -1,3 +1,22 @@
+;;; -*- Mode: Lisp; Syntax: Common-Lisp; -*-
+;;;
+;;; Copyright (C) by Marcus Pemer <mpemer@gmail.com>
+;;;
+;;; This file is part of DELTA-BASE.
+;;;
+;;; DELTA-BASE is free software: you can redistribute it and/or modify
+;;; it under the terms of the GNU General Public License as published by
+;;; the Free Software Foundation, either version 3 of the License, or
+;;; (at your option) any later version.
+;;;
+;;; DELTA-BASE is distributed in the hope that it will be useful,
+;;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;;; GNU General Public License for more details.
+;;;
+;;; You should have received a copy of the GNU General Public License
+;;; along with DELTA-BASE.  If not, see <http://www.gnu.org/licenses/>.
+
 (in-package :cl)
 
 (defpackage :delta-base
@@ -72,7 +91,7 @@
 
 
 (defun read-schema (&optional db-params)
-  "Query database and return schema definition"
+  "Query database and return schema definition as an S-SQL expression"
   (with-connection db-params
     (iter (for table-name in (read-tables))
 	  (collect
@@ -85,7 +104,6 @@
 			       (if (column-row-is-nullable-p column)
 				   (append '(or db-null) (list (column-row-type column)))
 				   (column-row-type column))))))))))
-
 
 (defun concat-sql-strings (list)
   "A non-recursive function that concatenates a list of sql statement strings with semi-colons and line breaks"
@@ -145,7 +163,8 @@
 
 
 (defun schema-diff (schema-a schema-b)
-  "Create s-sql statements that represent going from schema-a to schema-b"
+  "Create S-SQL statements that represent going from schema-a to schema-b.
+Both schema-a and schema-b are given as S-SQL forms."
   (let ((statements ()))
     (labels ((add-statement (statement) (setf statements (append statements statement))))
 
@@ -184,3 +203,12 @@
   (make-sql (delta-base (schema sb))))
 
 
+(schema-diff '((:create-table bs
+		((id :type integer) 
+		 (instr_id :type integer) 
+		 (date :type date)
+		 (period :type smallint))))
+	     '((:create-table bs
+		((id :type integer) 
+		 (instr_id :type integer) 
+		 (period :type smallint)))))
