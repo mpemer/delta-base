@@ -9,23 +9,6 @@ Delta-base is a Common Lisp library for interacting with the schema definition o
 
 Delta-base uses Marijn Haverbeke's excellent [Postmodern](http://marijnhaverbeke.nl/postmodern/) library and as such comes with support for Postgres. The code for Postmodern can be found on [Github](https://github.com/marijnh/Postmodern). All schema definitions are done in S-SQL. At the time of writing this README, the delta-base library depends on an extended version of S-SQL as described in [this pull request](https://github.com/marijnh/Postmodern/pull/66). Until further notice, please refer to [the forked repo of Postmodern](https://github.com/mpemer/Postmodern) if you are going to use delta-base.
 
-Known Issues and Caveats
-------------------------
-
-At the time of writing, the schema support is limited. The following is supported:
-
-* Table definitions with columns and types
-* null / not null flags for columns
-
-The following is not yet supported:
-
-* Table references (foreign key constraints)
-* Indices
-* Sequences
-* Anything else
-
-As you can see this functionality is quite limited in this initial version of the library. I plan on implementing indices, constraints, intelligent ordering of statements based on references, sequences and whatever else I need as I actually need it. If you feel something is missing you are welcome to contribute to this library by forking the repository, committing your changes and submitting a pull request.
-
 Supported Lisp
 --------------
 I use SBCL and have developed/tested using this platform. I also ran the library in ABCL once. It seemed to work. This is about the extent of my testing at this time.
@@ -97,4 +80,21 @@ Should yield:
 
     ((:ALTER-TABLE BS :ADD-COLUMN DATE :TYPE DATE))
 
+
+Known Issues and Caveats
+------------------------
+
+At the time of writing, the schema support is limited. The following is supported:
+
+* Table definitions with columns and types
+* null / not null flags for columns
+
+The following is not yet supported:
+
+* Table references (foreign key constraints)
+* Indices
+* Sequences
+* Anything else
+
+As you can see this functionality is quite limited in this initial version of the library. I plan on implementing indices, constraints, intelligent ordering of statements based on references, sequences and whatever else I need as I actually need it. If you feel something is missing you are welcome to contribute to this library by forking the repository, committing your changes and submitting a pull request.
 
