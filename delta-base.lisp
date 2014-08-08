@@ -182,3 +182,5 @@
 (defun delta-base-sql (schema db)
   "Calculate delta between schema and db, returns results as a string of sql statements"
   (make-sql (delta-base (schema sb))))
+
+

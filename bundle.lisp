@@ -1,6 +1,10 @@
 (in-package :cl)
 
 (ql:quickload "delta-base")
+(when (> (lisp-unit::fail (lisp-unit:run-tests :all :delta-base)) 0)
+  (format t "Unit tests were not successful - exiting doing nothing.~%")
+  (sb-ext:exit :code 1))
+
 (ql:quickload "com.dvlsoft.clon")
 
 (defpackage :delta-base-bundle
@@ -61,7 +65,7 @@ THIS SOFTWARE IS PROVIDED BY THE AUTHOR 'AS IS' AND ANY EXPRESSED OR IMPLIED WAR
   
   (when (getopt :long-name "version")
     (print-version))
-  
+
   (let* ((database (getopt :long-name "database"))
 
 	 (user (getopt :long-name "user"))
