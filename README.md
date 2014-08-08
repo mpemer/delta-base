@@ -98,3 +98,22 @@ The following is not yet supported:
 
 As you can see this functionality is quite limited in this initial version of the library. I plan on implementing indices, constraints, intelligent ordering of statements based on references, sequences and whatever else I need as I actually need it. If you feel something is missing you are welcome to contribute to this library by forking the repository, committing your changes and submitting a pull request.
 
+License
+=======
+
+Copyright (C) by Marcus Pemer <mpemer@gmail.com>
+
+DELTA-BASE is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+DELTA-BASE is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with DELTA-BASE.  If not, see <http://www.gnu.org/licenses/>.
+
+See license.txt for more detail.
