@@ -26,9 +26,13 @@
    #:schema-diff
    #:delta-base
    #:delta-base-sql
-   #:make-sql))
+   #:make-sql
+   :*database*))
 
 (in-package :delta-base)
+
+(defparameter *database* :postgres
+  "Valid values include :POSTGRES :ORACLE")
 
 (defprepared tables-stmt
 "SELECT table_name
@@ -90,7 +94,7 @@
 
 
 
-(defun read-schema (&optional db-params)
+(defun read-schema (db-params)
   "Query database and return schema definition as an S-SQL expression"
   (with-connection db-params
     (iter (for table-name in (read-tables))
@@ -109,9 +113,9 @@
   "A non-recursive function that concatenates a list of sql statement strings with semi-colons and line breaks"
   (if (listp list)
       (with-output-to-string (s)
-         (dolist (item list)
-           (if (stringp item)
-             (format s "~a;~%" item))))))
+	(dolist (item list)
+	  (if (stringp item)
+	      (format s "~a;~%" item))))))
 
 (defun make-sql (schema)
   "Convert an S-SQL expression to an executable SQL string"
